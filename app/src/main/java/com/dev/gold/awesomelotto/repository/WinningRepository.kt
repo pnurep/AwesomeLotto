@@ -7,15 +7,17 @@ import io.reactivex.Single
 
 interface WinningRepository {
 
-    fun getWinning(
+    fun getWinningById(
         id: Int
+    ): Single<Winning>
+
+    fun getWinningByDrawNumber(
+        drwNo: Int
     ): Single<Winning>
 
     fun getAllWinnings(): Flowable<List<Winning>>
 
-    fun setWinnings(
-        winnings: List<Winning>
-    ): Single<List<Long>>
+    fun setWinnings(winnings: List<Winning>)
 
     fun deleteAllWinnings(): Single<Int>
 }

@@ -31,7 +31,7 @@ object TypeConverter {
     @TypeConverter
     @JvmStatic
     fun fromStringToLotto(value: String?): Lotto? =
-        Gson().fromJson(value, object : TypeToken<List<Lotto>>() {}.type)
+        Gson().fromJson(value, object : TypeToken<Lotto>() {}.type)
 
     @TypeConverter
     @JvmStatic

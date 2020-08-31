@@ -1,4 +1,4 @@
-package com.dev.gold.awesomelotto.data.dao
+package com.dev.gold.awesomelotto.data.db.dao
 
 import androidx.room.*
 import com.dev.gold.awesomelotto.data.dto.Lotto

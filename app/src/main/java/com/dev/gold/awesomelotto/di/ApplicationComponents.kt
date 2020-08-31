@@ -3,6 +3,7 @@ package com.dev.gold.awesomelotto.di
 import com.dev.gold.awesomelotto.AlApplication
 import com.dev.gold.awesomelotto.di.modules.ApplicationModule
 import com.dev.gold.awesomelotto.di.modules.RepositoryModule
+import com.dev.gold.awesomelotto.di.modules.UtilsModule
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjector
@@ -15,6 +16,7 @@ import javax.inject.Singleton
     modules = [
         AndroidSupportInjectionModule::class,
         ApplicationModule::class,
+        UtilsModule::class,
         RepositoryModule::class,
         ActivityContributor::class
     ]

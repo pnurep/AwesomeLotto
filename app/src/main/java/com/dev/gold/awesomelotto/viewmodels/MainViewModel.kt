@@ -4,13 +4,17 @@ import com.dev.gold.awesomelotto.repository.WinningRepository
 
 
 class MainViewModel(
-    private val winningRepository: WinningRepository
+    winningRepository: WinningRepository
 ) : BaseViewModel() {
 
     init {
 
         winningRepository
-
+            .getWinningByDrawNumber(926)
+            .subscribeAlter({
+                it
+            }, { throwable ->
+                throwable
+            })
     }
-
 }

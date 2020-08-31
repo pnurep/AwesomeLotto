@@ -3,6 +3,7 @@ package com.dev.gold.awesomelotto
 import android.app.Application
 import com.dev.gold.awesomelotto.di.DaggerApplicationComponent
 import com.dev.gold.awesomelotto.utils.TaskStateManager
+import com.facebook.stetho.Stetho
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector
@@ -29,6 +30,9 @@ class AlApplication : Application(), HasAndroidInjector {
         super.onCreate()
 
         TaskStateManager.init(this)
+
+        if (BuildConfig.DEBUG)
+            Stetho.initializeWithDefaults(this)
 
         setRxGlobalErrorHandler()
 

@@ -1,6 +1,8 @@
 package com.dev.gold.awesomelotto.data.dto
 
 import androidx.room.Entity
+import androidx.room.TypeConverters
+import com.dev.gold.awesomelotto.data.db.TypeConverter
 import com.google.gson.annotations.SerializedName
 import java.util.*
 
@@ -9,12 +11,14 @@ import java.util.*
 class Winning {
 
     @field:SerializedName("id")
-    var id : Int = -1
+    var id: Int = -1
 
     @field:SerializedName("date")
-    var date : Date? = null
+    @TypeConverters(TypeConverter::class)
+    var date: Date? = null
 
     @field:SerializedName("winningNumber")
+    @TypeConverters(TypeConverter::class)
     var winningNumber: Lotto = Lotto()
 
     @field:SerializedName("bonus")

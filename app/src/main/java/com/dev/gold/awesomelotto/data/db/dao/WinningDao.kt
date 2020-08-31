@@ -1,6 +1,9 @@
-package com.dev.gold.awesomelotto.data.dao
+package com.dev.gold.awesomelotto.data.db.dao
 
-import androidx.room.*
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
 import com.dev.gold.awesomelotto.data.dto.Winning
 import io.reactivex.Flowable
 import io.reactivex.Single
@@ -26,7 +29,7 @@ interface WinningDao {
     fun loadWinnings(): Flowable<List<Winning>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(winning: List<Winning>): Single<List<Long>>
+    fun insert(winning: List<Winning>)
 
     @Query("""DELETE FROM winning""")
     fun deleteAll(): Single<Int>

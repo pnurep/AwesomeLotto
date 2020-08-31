@@ -1,6 +1,6 @@
 package com.dev.gold.awesomelotto.repository.impl
 
-import com.dev.gold.awesomelotto.data.dao.LottoDao
+import com.dev.gold.awesomelotto.data.db.dao.LottoDao
 import com.dev.gold.awesomelotto.data.dto.Lotto
 import com.dev.gold.awesomelotto.repository.LottoRepository
 import io.reactivex.Flowable
