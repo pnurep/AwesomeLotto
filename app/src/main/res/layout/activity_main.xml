@@ -11,34 +11,104 @@
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.drawerlayout.widget.DrawerLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".ui.MainActivity">
+        android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/tv_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@{viewModel.latestDrawNumber + `회 당첨번호`}"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.35"
-            tools:text="000회 당첨번호" />
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/tv_win_numbers"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_marginTop="16dp"
-            android:text="@{viewModel.winningNumber}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_title"
-            tools:text="1,2,3,4,5,6 + 7" />
+            <com.google.android.material.appbar.AppBarLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolBar"
+                    style="@style/Toolbar.Main" />
+
+            </com.google.android.material.appbar.AppBarLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/tv_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{viewModel.latestDrawNumber + `회 당첨번호`}"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.35"
+                    tools:text="000회 당첨번호" />
+
+                <TextView
+                    android:id="@+id/tv_win_numbers"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="16dp"
+                    android:text="@{viewModel.winningNumber}"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_title"
+                    tools:text="1,2,3,4,5,6 + 7" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+        <com.google.android.material.navigation.NavigationView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="start">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/tv_generate"
+                    android:layout_width="match_parent"
+                    android:layout_height="52dp"
+                    android:text="로또 번호 생성"
+                    android:textSize="24dp"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_generated_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="52dp"
+                    android:text="생성한 로또 번호"
+                    android:textSize="24dp"
+                    app:layout_constraintTop_toBottomOf="@id/tv_generate" />
+
+                <TextView
+                    android:id="@+id/tv_qr_code"
+                    android:layout_width="match_parent"
+                    android:layout_height="52dp"
+                    android:text="qrCode 확인"
+                    android:textSize="24dp"
+                    app:layout_constraintTop_toBottomOf="@id/tv_generated_list" />
+
+                <TextView
+                    android:id="@+id/tv_past"
+                    android:layout_width="match_parent"
+                    android:layout_height="52dp"
+                    android:text="지난 회차 정보 확인"
+                    android:textSize="24dp"
+                    app:layout_constraintTop_toBottomOf="@id/tv_qr_code" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.navigation.NavigationView>
+
+    </androidx.drawerlayout.widget.DrawerLayout>
 
 </layout>

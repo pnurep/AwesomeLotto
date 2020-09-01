@@ -23,15 +23,13 @@ class MainViewModel(
         winningRepository
             .getWinningByDrawNumber(
                 getLatestDrawNumber()
-            ).subscribeAlter({ winning ->
+            ).subscribeAlter { winning ->
 
                 _latestDrawNumber.value = winning.id
 
                 _winningNumber.value = (winning.winningNumber.numbers)
                     .joinToString() + " + ${winning.bonusNumber}"
 
-            }, { throwable ->
-                throwable
-            })
+            }
     }
 }
