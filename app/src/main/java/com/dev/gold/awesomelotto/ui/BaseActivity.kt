@@ -26,6 +26,7 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity(), Navigati
         super.onCreate(savedInstanceState)
 
         binding = DataBindingUtil.setContentView(this, layoutId)
+        binding.lifecycleOwner = this
     }
 
     override fun goTo(

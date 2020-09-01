@@ -18,7 +18,7 @@ import com.google.gson.annotations.SerializedName
 //  "drwtNo3": 31,
 //  "drwtNo1": 16
 //}
-data class ResponseLotto(
+data class ResponseWinning(
     @SerializedName("totSellamnt")
     val totSellamnt: Long,
 

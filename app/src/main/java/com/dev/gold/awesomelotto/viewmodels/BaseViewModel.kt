@@ -7,7 +7,9 @@ import com.dev.gold.awesomelotto.utils.TerminalOperatorsImpl
 
 abstract class BaseViewModel(
     terminalOperators: TerminalOperators = TerminalOperatorsImpl()
-) : ViewModel(), TerminalOperators by terminalOperators {
+) : ViewModel(),
+    TerminalOperators by terminalOperators
+{
 
     public override fun onCleared() {
         clearSubscribes()

@@ -1,6 +1,6 @@
 package com.dev.gold.awesomelotto.repository.api
 
-import com.dev.gold.awesomelotto.data.dao.ResponseLotto
+import com.dev.gold.awesomelotto.data.dao.ResponseWinning
 import io.reactivex.Single
 import retrofit2.http.*
 
@@ -12,5 +12,5 @@ interface WinningApi {
     fun getWinning(
         @Query("drwNo")
         drwNo: Int
-    ): Single<ResponseLotto>
+    ): Single<ResponseWinning>
 }
