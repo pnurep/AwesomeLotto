@@ -48,6 +48,11 @@ object MainModule {
     @ActivityScope
     @ViewModelKey(MainViewModel::class)
     fun provideViewModel(
+        navigationHandler: NavigationHandler,
         winningRepository: WinningRepository
-    ): ViewModel = MainViewModel(winningRepository)
+    ): ViewModel =
+        MainViewModel(
+            navigationHandler,
+            winningRepository
+        )
 }
