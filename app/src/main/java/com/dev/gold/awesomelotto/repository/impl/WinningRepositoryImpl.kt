@@ -1,6 +1,5 @@
 package com.dev.gold.awesomelotto.repository.impl
 
-import com.dev.gold.awesomelotto.data.dao.ResponseWinning
 import com.dev.gold.awesomelotto.data.db.dao.LottoDao
 import com.dev.gold.awesomelotto.data.db.dao.WinningDao
 import com.dev.gold.awesomelotto.data.dto.Lotto
@@ -10,7 +9,6 @@ import com.dev.gold.awesomelotto.repository.WinningRepository
 import com.dev.gold.awesomelotto.repository.api.WinningApi
 import com.dev.gold.awesomelotto.repository.utils.ApiManager
 import io.reactivex.Flowable
-import io.reactivex.Observable
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -27,38 +25,22 @@ class WinningRepositoryImpl(
 
     private val api = apiManager[WinningApi::class.java]
 
-    override fun getWinningById(id: Int): Winning? {
-        return winningDao.getWinningById(id)
-    }
+    override fun getWinningById(id: Int): Winning? =
+        winningDao.getWinningById(id)
 
-    override fun getWinningAndLottoById(id: Int): Single<WinningAndLotto> =
-        winningDao.getWinningAndLottoById()
+    override fun getWinningAndLottoById(lottoId: Int): Single<WinningAndLotto> =
+        winningDao.getWinningAndLottoById(lottoId)
 
     override fun getWinningByDrawNumber(drwNo: Int) =
         api.getWinning(drwNo)
             .subscribeOn(Schedulers.io())
-            .flatMapObservable { response ->
+            .map { response ->
 
                 // load from DB
-                val savedWinning = getWinningById(drwNo)
-
-                Observable.create<ResponseWinning> { emitter ->
-                    if (savedWinning != null) {
-                        lottoDao.deleteById(savedWinning.winningLottoId)
-                            .subscribe({
-                                emitter.onNext(response)
-                                emitter.onComplete()
-                            }, {
-                                emitter.onComplete()
-                            })
-                    } else {
-                        emitter.onNext(response)
-                        emitter.onComplete()
-                    }
+                getWinningById(drwNo)?.let { savedWinning ->
+                    lottoDao.deleteById(savedWinning.winningLottoId)
                 }
-            }
-            .singleOrError()
-            .flatMap { response ->
+
                 val lottoId = lottoDao.insert(
                     Lotto().apply {
                         numbers = listOf(
@@ -78,9 +60,12 @@ class WinningRepositoryImpl(
                     bonusNumber = response.bnusNo
                 }
 
-                val winningId = setWinning(winning)
+                winningDao.insert(winning)
 
-                getWinningAndLottoById(winningId.toInt())
+                lottoId
+            }
+            .flatMap { lottoId ->
+                getWinningAndLottoById(lottoId.toInt())
             }
             .observeOn(AndroidSchedulers.mainThread())
 
@@ -92,4 +77,8 @@ class WinningRepositoryImpl(
 
     override fun deleteAllWinnings(): Single<Int> =
         winningDao.deleteAll()
+
+    override fun deleteWinningById(winningId: Int): Single<Int> {
+        return winningDao.deleteById(winningId)
+    }
 }

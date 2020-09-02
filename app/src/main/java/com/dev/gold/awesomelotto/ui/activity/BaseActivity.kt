@@ -7,12 +7,18 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import com.dev.gold.awesomelotto.data.ActivityResults
 import com.dev.gold.awesomelotto.utils.NavigationHandler
+import com.dev.gold.awesomelotto.utils.TerminalOperators
+import com.dev.gold.awesomelotto.utils.TerminalOperatorsImpl
 import com.petarmarijanovic.rxactivityresult.RxActivityResult
 import dagger.android.AndroidInjection
 import io.reactivex.Single
 
 
-abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity(), NavigationHandler {
+abstract class BaseActivity<T : ViewDataBinding> :
+    AppCompatActivity(),
+    NavigationHandler,
+    TerminalOperators by TerminalOperatorsImpl()
+{
 
     protected lateinit var binding: T
 

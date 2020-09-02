@@ -1,10 +1,7 @@
 package com.dev.gold.awesomelotto.data.dto
 
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.ForeignKey
+import androidx.room.*
 import androidx.room.ForeignKey.CASCADE
-import androidx.room.TypeConverters
 import com.dev.gold.awesomelotto.data.db.TypeConverter
 import java.util.*
 
@@ -18,7 +15,8 @@ import java.util.*
             childColumns = ["winningLottoId"],
             onDelete = CASCADE
         )
-    ]
+    ],
+    indices = [Index("winningLottoId")]
 )
 class Winning {
 

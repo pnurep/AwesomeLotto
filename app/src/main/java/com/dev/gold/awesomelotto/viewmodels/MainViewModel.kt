@@ -10,7 +10,7 @@ import com.dev.gold.awesomelotto.utils.UtilsClass.getLatestDrawNumber
 
 class MainViewModel(
     private val navigationHandler: NavigationHandler,
-    winningRepository: WinningRepository
+    winningRepository: WinningRepository,
 ) : BaseViewModel() {
 
     private val _latestDrawNumber = MutableLiveData<Int>()
@@ -37,7 +37,9 @@ class MainViewModel(
     fun goToGenerateActivity() {
         navigationHandler.goTo(
             LottoGenerationActivity::class.java
-        ).subscribeAlter {}
+        ).subscribeAlter {
+
+        }
     }
 
     fun goToGeneratedNumberActivity() {

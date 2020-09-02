@@ -13,7 +13,7 @@ interface WinningRepository {
     ): Winning?
 
     fun getWinningAndLottoById(
-        id: Int
+        lottoId: Int
     ): Single<WinningAndLotto>
 
     fun getWinningByDrawNumber(
@@ -25,4 +25,6 @@ interface WinningRepository {
     fun setWinning(winning: Winning): Long
 
     fun deleteAllWinnings(): Single<Int>
+
+    fun deleteWinningById(winningId: Int): Single<Int>
 }

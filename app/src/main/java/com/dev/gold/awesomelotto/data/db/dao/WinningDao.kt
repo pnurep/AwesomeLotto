@@ -11,8 +11,8 @@ import io.reactivex.Single
 interface WinningDao {
 
     @Transaction
-    @Query("""SELECT * FROM Lotto""")
-    fun getWinningAndLottoById(): Single<WinningAndLotto>
+    @Query("""SELECT * FROM Lotto WHERE lottoId = :lottoId""")
+    fun getWinningAndLottoById(lottoId: Int): Single<WinningAndLotto>
 
     @Query("""SELECT * FROM Winning WHERE winning_id = :id LIMIT 1""")
     fun getWinningById(id: Int): Winning?
@@ -26,7 +26,7 @@ interface WinningDao {
     fun loadWinnings(): Flowable<List<Winning>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(winning: Winning): Long
+    fun insert(winning1: Winning): Long
 
     @Query("""DELETE FROM Winning WHERE winning_id = :winningId""")
     fun deleteById(winningId: Int): Single<Int>

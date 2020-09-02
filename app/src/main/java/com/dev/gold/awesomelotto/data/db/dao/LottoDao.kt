@@ -24,7 +24,7 @@ interface LottoDao {
     fun deleteAll(): Single<Int>
 
     @Query("""DELETE FROM Lotto WHERE lottoId = :id""")
-    fun deleteById(id: Int): Single<Int>
+    fun deleteById(id: Int): Int
 
     @Query(
         """
