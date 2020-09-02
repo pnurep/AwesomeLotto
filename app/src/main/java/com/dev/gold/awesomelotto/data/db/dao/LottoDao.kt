@@ -11,7 +11,7 @@ interface LottoDao {
 
     // NOTE : where the value emitted on onSuccess is the list of row ids of the items inserted
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(lotto: List<Lotto>): Single<List<Long>>
+    fun insert(lotto: Lotto): Long
 
     @Update
     fun update(lotto: Lotto): Single<Int>
@@ -23,10 +23,13 @@ interface LottoDao {
     @Query("""DELETE FROM lotto""")
     fun deleteAll(): Single<Int>
 
+    @Query("""DELETE FROM Lotto WHERE lottoId = :id""")
+    fun deleteById(id: Int): Single<Int>
+
     @Query(
         """
         SELECT * FROM lotto
-        ORDER BY id DESC"""
+        ORDER BY lottoId DESC"""
     )
     fun loadLotto(): Flowable<List<Lotto>>
 }

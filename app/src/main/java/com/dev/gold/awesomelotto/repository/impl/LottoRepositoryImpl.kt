@@ -11,7 +11,7 @@ class LottoRepositoryImpl(
     private val lottoDao: LottoDao
 ) : LottoRepository {
 
-    override fun generateLotto(lotto: List<Lotto>): Single<List<Long>> =
+    override fun generateLotto(lotto: Lotto): Long =
         lottoDao.insert(lotto)
 
     override fun updateLotto(lotto: Lotto): Single<Int> =

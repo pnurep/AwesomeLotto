@@ -2,16 +2,16 @@ package com.dev.gold.awesomelotto.data.dto
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.google.gson.annotations.SerializedName
+import androidx.room.TypeConverters
+import com.dev.gold.awesomelotto.data.db.TypeConverter
 
 
-@Entity(tableName = "lotto")
+@Entity
 class Lotto {
 
     @PrimaryKey(autoGenerate = true)
-    @field:SerializedName("id")
-    var id: Int = -1
+    var lottoId: Int = 0
 
-    @field:SerializedName("numbers")
+    @TypeConverters(TypeConverter::class)
     var numbers: List<Int> = listOf()
 }

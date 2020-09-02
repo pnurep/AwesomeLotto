@@ -1,26 +1,34 @@
 package com.dev.gold.awesomelotto.data.dto
 
+import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.ForeignKey
+import androidx.room.ForeignKey.CASCADE
 import androidx.room.TypeConverters
 import com.dev.gold.awesomelotto.data.db.TypeConverter
-import com.google.gson.annotations.SerializedName
 import java.util.*
 
 
-@Entity(tableName = "winning", primaryKeys = ["id"])
+@Entity(
+    primaryKeys = ["winning_id"],
+    foreignKeys = [
+        ForeignKey(
+            entity = Lotto::class,
+            parentColumns = ["lottoId"],
+            childColumns = ["winningLottoId"],
+            onDelete = CASCADE
+        )
+    ]
+)
 class Winning {
 
-    @field:SerializedName("id")
-    var id: Int = -1
+    @ColumnInfo(name = "winning_id")
+    var id: Int = 0
 
-    @field:SerializedName("date")
     @TypeConverters(TypeConverter::class)
     var date: Date? = null
 
-    @field:SerializedName("winningNumber")
-    @TypeConverters(TypeConverter::class)
-    var winningNumber: Lotto = Lotto()
+    var winningLottoId: Int = -1
 
-    @field:SerializedName("bonus")
     var bonusNumber: Int = -1
 }

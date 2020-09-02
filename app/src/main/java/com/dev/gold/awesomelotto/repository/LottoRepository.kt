@@ -8,8 +8,8 @@ import io.reactivex.Single
 interface LottoRepository{
 
     fun generateLotto(
-        lotto: List<Lotto>
-    ): Single<List<Long>>
+        lotto: Lotto
+    ): Long
 
     fun updateLotto(
         lotto: Lotto

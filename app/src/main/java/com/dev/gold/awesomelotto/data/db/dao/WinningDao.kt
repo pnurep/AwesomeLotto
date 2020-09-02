@@ -1,10 +1,8 @@
 package com.dev.gold.awesomelotto.data.db.dao
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.dev.gold.awesomelotto.data.dto.Winning
+import com.dev.gold.awesomelotto.data.dto.WinningAndLotto
 import io.reactivex.Flowable
 import io.reactivex.Single
 
@@ -12,25 +10,27 @@ import io.reactivex.Single
 @Dao
 interface WinningDao {
 
-    @Query(
-        """
-        SELECT * FROM winning
-        WHERE id = :id LIMIT 1
-        """
-    )
-    fun getWinningById(id: Int): Single<Winning>
+    @Transaction
+    @Query("""SELECT * FROM Lotto""")
+    fun getWinningAndLottoById(): Single<WinningAndLotto>
+
+    @Query("""SELECT * FROM Winning WHERE winning_id = :id LIMIT 1""")
+    fun getWinningById(id: Int): Winning?
 
     @Query(
         """
-        SELECT * FROM winning
-        ORDER BY id DESC
+        SELECT * FROM Winning
+        ORDER BY winning_id DESC
         """
     )
     fun loadWinnings(): Flowable<List<Winning>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(winning: List<Winning>)
+    fun insert(winning: Winning): Long
 
-    @Query("""DELETE FROM winning""")
+    @Query("""DELETE FROM Winning WHERE winning_id = :winningId""")
+    fun deleteById(winningId: Int): Single<Int>
+
+    @Query("""DELETE FROM Winning""")
     fun deleteAll(): Single<Int>
 }

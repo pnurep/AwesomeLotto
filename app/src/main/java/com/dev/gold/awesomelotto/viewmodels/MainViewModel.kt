@@ -25,11 +25,10 @@ class MainViewModel(
         winningRepository
             .getWinningByDrawNumber(
                 getLatestDrawNumber()
-            ).subscribeAlter { winning ->
-
+            ).subscribeAlter { (lotto, winning) ->
                 _latestDrawNumber.value = winning.id
 
-                _winningNumber.value = (winning.winningNumber.numbers)
+                _winningNumber.value = (lotto.numbers)
                     .joinToString() + " + ${winning.bonusNumber}"
             }
     }

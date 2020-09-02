@@ -27,9 +27,11 @@ object RepositoryModule {
     @Provides
     internal fun provideWinningRepository(
         winningDao: WinningDao,
+        lottoDao: LottoDao,
         apiManager: ApiManager
     ): WinningRepository = WinningRepositoryImpl(
         apiManager,
-        winningDao
+        winningDao,
+        lottoDao
     )
 }
