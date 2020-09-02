@@ -7,6 +7,8 @@ import io.reactivex.Observable
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class LottoGenerationRepositoryImpl(
@@ -36,5 +38,6 @@ class LottoGenerationRepositoryImpl(
                 .toMutableList()
                 .apply { shuffle() }
                 .take(6)
+            date = Date()
         }
 }

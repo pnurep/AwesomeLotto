@@ -5,6 +5,8 @@ import com.dev.gold.awesomelotto.data.dto.Lotto
 import com.dev.gold.awesomelotto.repository.LottoRepository
 import io.reactivex.Flowable
 import io.reactivex.Single
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 
 
 class LottoRepositoryImpl(
@@ -25,4 +27,6 @@ class LottoRepositoryImpl(
 
     override fun getAllLotto(): Flowable<List<Lotto>> =
         lottoDao.loadLotto()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
 }

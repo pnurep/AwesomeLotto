@@ -47,6 +47,7 @@ class WinningRepositoryImpl(
                             response.drwtNo1, response.drwtNo2, response.drwtNo3,
                             response.drwtNo4, response.drwtNo5, response.drwtNo6
                         )
+                        date = Date()
                     }
                 )
 

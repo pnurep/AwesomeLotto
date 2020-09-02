@@ -13,11 +13,9 @@ class LottoGenerationViewModel(
     fun onClickGenerate() {
 
         repo.generateLottoNumber(5)
-            .subscribeAlter({ lottoList ->
+            .subscribeAlter { lottoList ->
                 data.clear()
                 data.addAll(lottoList)
-            }, { throwable ->
-                throwable
-            })
+            }
     }
 }

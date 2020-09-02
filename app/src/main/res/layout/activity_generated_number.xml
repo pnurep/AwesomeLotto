@@ -7,11 +7,11 @@
 
         <variable
             name="viewModel"
-            type="com.dev.gold.awesomelotto.viewmodels.LottoGenerationViewModel" />
+            type="com.dev.gold.awesomelotto.viewmodels.GeneratedNumberViewModel" />
 
         <variable
             name="listAdapter"
-            type="com.dev.gold.awesomelotto.ui.widget.listAdapter.LottoGenerationListAdapter" />
+            type="com.dev.gold.awesomelotto.ui.widget.listAdapter.GeneratedNumberListAdapter" />
 
     </data>
 
@@ -27,39 +27,26 @@
                 android:id="@+id/toolBar"
                 style="@style/Toolbar.Base"
                 app:titleTextColor="#FFFFFF"
-                app:toolBarTitle="@{`로또번호 생성`}" />
+                app:toolBarTitle="@{`생성한 번호 확인`}" />
 
         </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/list"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="0dp"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintHeight_percent=".8"
-                app:layout_constraintTop_toTopOf="parent"
-                app:listAdapter="@{listAdapter}"
-                tools:itemCount="5"
-                tools:listitem="@layout/holder_lotto" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_generate"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:elevation="8dp"
-                android:onClick="@{v -> viewModel.onClickGenerate()}"
-                android:text="번호생성"
-                android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/list"
-                app:layout_constraintWidth_percent=".6" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:listAdapter="@{listAdapter}"
+                tools:listitem="@layout/holder_lotto" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
