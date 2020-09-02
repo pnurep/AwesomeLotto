@@ -2,8 +2,10 @@ package com.dev.gold.awesomelotto.di.modules
 
 import com.dev.gold.awesomelotto.data.db.dao.LottoDao
 import com.dev.gold.awesomelotto.data.db.dao.WinningDao
+import com.dev.gold.awesomelotto.repository.LottoGenerationRepository
 import com.dev.gold.awesomelotto.repository.LottoRepository
 import com.dev.gold.awesomelotto.repository.WinningRepository
+import com.dev.gold.awesomelotto.repository.impl.LottoGenerationRepositoryImpl
 import com.dev.gold.awesomelotto.repository.impl.LottoRepositoryImpl
 import com.dev.gold.awesomelotto.repository.impl.WinningRepositoryImpl
 import com.dev.gold.awesomelotto.repository.utils.ApiManager
@@ -34,4 +36,13 @@ object RepositoryModule {
         winningDao,
         lottoDao
     )
+
+    @Reusable
+    @Provides
+    internal fun provideLottoGenerationRepository(
+        lottoDao: LottoDao
+    ): LottoGenerationRepository =
+        LottoGenerationRepositoryImpl(
+            lottoDao
+        )
 }

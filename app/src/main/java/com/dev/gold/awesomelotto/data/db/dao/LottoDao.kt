@@ -28,6 +28,15 @@ interface LottoDao {
 
     @Query(
         """
+            SELECT * FROM Lotto
+            WHERE lottoId IN (:ids)
+            ORDER BY lottoId DESC
+        """
+    )
+    fun loadLottoByIds(ids: List<Int>): Single<List<Lotto>>
+
+    @Query(
+        """
         SELECT * FROM lotto
         ORDER BY lottoId DESC"""
     )

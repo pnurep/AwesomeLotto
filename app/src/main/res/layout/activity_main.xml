@@ -35,7 +35,8 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
                 <TextView
                     android:id="@+id/tv_title"
@@ -75,7 +76,8 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:paddingTop="54dp">
 
                 <TextView
                     android:id="@+id/tv_generate"

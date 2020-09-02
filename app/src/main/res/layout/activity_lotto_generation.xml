@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.dev.gold.awesomelotto.viewmodels.LottoGenerationViewModel" />
+
+        <variable
+            name="listAdapter"
+            type="com.dev.gold.awesomelotto.ui.widget.listAdapter.LottoGenerationListAdapter" />
+
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolBar"
+                style="@style/Toolbar.Base"
+                app:titleTextColor="#FFFFFF"
+                app:toolBarTitle="@{`로또번호 생성`}" />
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/list"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:background="#6093fc"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintHeight_percent=".8"
+                app:layout_constraintTop_toTopOf="parent"
+                app:listAdapter="@{listAdapter}"
+                tools:itemCount="5"
+                tools:listitem="@layout/holder_lotto" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_generate"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:elevation="8dp"
+                android:onClick="@{v -> viewModel.onClickGenerate()}"
+                android:text="번호생성"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/list"
+                app:layout_constraintWidth_percent=".6" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</layout>

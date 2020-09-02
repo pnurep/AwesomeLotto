@@ -4,6 +4,7 @@ import android.graphics.drawable.Drawable
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.databinding.BindingAdapter
+import androidx.recyclerview.widget.RecyclerView
 import com.dev.gold.awesomelotto.utils.getActivity
 
 
@@ -26,4 +27,9 @@ fun Toolbar.setAppBarController(
             drawable?.let(::setHomeAsUpIndicator)
         }
     }
+}
+
+@BindingAdapter("listAdapter")
+fun RecyclerView.setListAdapter(listAdapter: RecyclerView.Adapter<*>) {
+    adapter = listAdapter
 }

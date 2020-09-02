@@ -1,4 +1,4 @@
-package com.dev.gold.awesomelotto.ui
+package com.dev.gold.awesomelotto.ui.activity
 
 import android.os.Bundle
 import android.view.MenuItem

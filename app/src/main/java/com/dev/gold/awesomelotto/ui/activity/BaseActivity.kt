@@ -1,4 +1,4 @@
-package com.dev.gold.awesomelotto.ui
+package com.dev.gold.awesomelotto.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,7 +7,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import com.dev.gold.awesomelotto.data.ActivityResults
 import com.dev.gold.awesomelotto.utils.NavigationHandler
-import com.petarmarijanovic.rxactivityresult.ActivityResult
 import com.petarmarijanovic.rxactivityresult.RxActivityResult
 import dagger.android.AndroidInjection
 import io.reactivex.Single

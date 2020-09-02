@@ -1,6 +1,6 @@
 package com.dev.gold.awesomelotto.viewmodels
 
-import com.dev.gold.awesomelotto.ui.MainActivity
+import com.dev.gold.awesomelotto.ui.activity.MainActivity
 import com.dev.gold.awesomelotto.utils.NavigationHandler
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers

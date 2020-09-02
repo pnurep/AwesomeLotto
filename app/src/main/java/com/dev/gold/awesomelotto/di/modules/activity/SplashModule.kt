@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.dev.gold.awesomelotto.di.ViewModelKey
 import com.dev.gold.awesomelotto.di.scopes.ActivityScope
-import com.dev.gold.awesomelotto.ui.SplashActivity
+import com.dev.gold.awesomelotto.ui.activity.SplashActivity
 import com.dev.gold.awesomelotto.utils.NavigationHandler
 import com.dev.gold.awesomelotto.viewmodels.SplashViewModel
 import dagger.Module

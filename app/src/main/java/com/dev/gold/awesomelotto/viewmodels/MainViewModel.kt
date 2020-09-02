@@ -3,6 +3,7 @@ package com.dev.gold.awesomelotto.viewmodels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.dev.gold.awesomelotto.repository.WinningRepository
+import com.dev.gold.awesomelotto.ui.activity.LottoGenerationActivity
 import com.dev.gold.awesomelotto.utils.NavigationHandler
 import com.dev.gold.awesomelotto.utils.UtilsClass.getLatestDrawNumber
 
@@ -34,7 +35,9 @@ class MainViewModel(
     }
 
     fun goToGenerateActivity() {
-        navigationHandler.goTo(TODO())
+        navigationHandler.goTo(
+            LottoGenerationActivity::class.java
+        ).subscribeAlter {}
     }
 
     fun goToGeneratedNumberActivity() {

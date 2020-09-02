@@ -20,8 +20,9 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:replace="supportsRtl">
-
-        <activity android:name=".ui.SplashActivity"
+        <activity android:name=".ui.activity.LottoGenerationActivity"></activity>
+        <activity
+            android:name=".ui.activity.SplashActivity"
             android:launchMode="singleTop"
             android:screenOrientation="sensorPortrait">
             <intent-filter>
@@ -30,11 +31,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".ui.MainActivity"
+        <activity
+            android:name=".ui.activity.MainActivity"
             android:launchMode="singleTask"
             android:screenOrientation="sensorPortrait" />
-
     </application>
 
 </manifest>

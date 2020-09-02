@@ -1,11 +1,13 @@
 package com.dev.gold.awesomelotto.di
 
 import com.dev.gold.awesomelotto.di.modules.ViewModelFactoryModule
+import com.dev.gold.awesomelotto.di.modules.activity.LottoGenerationModule
 import com.dev.gold.awesomelotto.di.modules.activity.MainModule
 import com.dev.gold.awesomelotto.di.modules.activity.SplashModule
 import com.dev.gold.awesomelotto.di.scopes.ActivityScope
-import com.dev.gold.awesomelotto.ui.MainActivity
-import com.dev.gold.awesomelotto.ui.SplashActivity
+import com.dev.gold.awesomelotto.ui.activity.LottoGenerationActivity
+import com.dev.gold.awesomelotto.ui.activity.MainActivity
+import com.dev.gold.awesomelotto.ui.activity.SplashActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -20,4 +22,8 @@ abstract class ActivityContributor {
     @ActivityScope
     @ContributesAndroidInjector(modules = [ViewModelFactoryModule::class, MainModule::class])
     abstract fun provideMainActivity(): MainActivity
+
+    @ActivityScope
+    @ContributesAndroidInjector(modules = [ViewModelFactoryModule::class, LottoGenerationModule::class])
+    abstract fun provideLottoGenerationActivity(): LottoGenerationActivity
 }
