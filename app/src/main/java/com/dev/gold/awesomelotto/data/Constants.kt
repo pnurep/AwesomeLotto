@@ -17,5 +17,7 @@ enum class ActivityConstants(val target: Class<*>) {
 
     GENERATED(GeneratedNumberActivity::class.java),
 
-    QRCODE(QrCodeActivity::class.java)
+    QRCODE(QrCodeActivity::class.java),
+
+    WEBVIEW(WebViewActivity::class.java)
 }

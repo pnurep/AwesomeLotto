@@ -10,7 +10,6 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
 
-
     <application
         android:name=".AlApplication"
         android:allowBackup="true"
@@ -23,7 +22,7 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:replace="supportsRtl">
-
+        <activity android:name=".ui.activity.WebViewActivity"></activity>
         <activity
             android:name=".ui.activity.SplashActivity"
             android:launchMode="singleTop"
@@ -34,24 +33,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".ui.activity.MainActivity"
             android:launchMode="singleTask"
             android:screenOrientation="sensorPortrait" />
-
         <activity
             android:name=".ui.activity.LottoGenerationActivity"
             android:screenOrientation="sensorPortrait" />
-
         <activity
             android:name=".ui.activity.GeneratedNumberActivity"
             android:screenOrientation="sensorPortrait" />
-
         <activity
             android:name=".ui.activity.QrCodeActivity"
             android:screenOrientation="sensorPortrait" />
-
     </application>
 
 </manifest>

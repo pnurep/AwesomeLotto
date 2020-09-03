@@ -30,4 +30,8 @@ abstract class ActivityContributor {
     @ActivityScope
     @ContributesAndroidInjector(modules = [ViewModelFactoryModule::class, QrCodeModule::class])
     abstract fun provideQrCodeActivity(): QrCodeActivity
+
+    @ActivityScope
+    @ContributesAndroidInjector(modules = [ViewModelFactoryModule::class, WebViewModule::class])
+    abstract fun provideWebViewActivity(): WebViewActivity
 }

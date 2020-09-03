@@ -2,6 +2,7 @@ package com.dev.gold.awesomelotto.viewmodels
 
 import android.Manifest
 import android.app.Activity
+import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.LiveData
@@ -78,18 +79,23 @@ class MainViewModel(
                 )
             }
             .filter { it.success }
-            .subscribeAlter {
-
+            .flatMapSingle {
                 IntentIntegrator.parseActivityResult(
                     Activity.RESULT_OK,
                     it.resultIntent
                 )?.let { result ->
                     result.contents?.let { contents ->
-                        Toast.makeText(v.context, "Scanned: $contents", Toast.LENGTH_SHORT).show()
-                    } ?: run {
-                        Toast.makeText(v.context, "Cancelled", Toast.LENGTH_SHORT).show()
+                        navigationHandler.goTo(
+                            targetActivityClass = WEBVIEW.target,
+                            args = Bundle().apply {
+                                putString("url", contents)
+                            }
+                        )
                     }
                 }
+            }
+            .subscribeAlter {
+                it
             }
     }
 
