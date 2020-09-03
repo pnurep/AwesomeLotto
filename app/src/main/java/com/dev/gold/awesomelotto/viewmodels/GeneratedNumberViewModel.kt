@@ -18,11 +18,9 @@ class GeneratedNumberViewModel(
                 Flowable.create<Any>(
                     { emitter ->
                         lottoList.groupBy {
-                            it.date
+                            it.date.toStringDate("yyyy-MM-dd")
                         }.map { entry ->
-                            emitter.onNext(
-                                entry.key.toStringDate("yyyy-MM-dd")
-                            )
+                            emitter.onNext(entry.key)
                             entry.value.forEach { lotto ->
                                 emitter.onNext(lotto)
                             }
