@@ -1,6 +1,6 @@
 package com.dev.gold.awesomelotto.viewmodels
 
-import com.dev.gold.awesomelotto.ui.activity.MainActivity
+import com.dev.gold.awesomelotto.data.ActivityConstants.MAIN
 import com.dev.gold.awesomelotto.utils.NavigationHandler
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -20,7 +20,9 @@ class SplashViewModel(
                 TimeUnit.SECONDS.sleep(2L)
             }
             .flatMapSingle {
-                navigationHandler.goTo(MainActivity::class.java)
+                navigationHandler.goTo(
+                    MAIN.target
+                )
             }
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeAlter {
