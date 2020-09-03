@@ -6,6 +6,8 @@ import android.content.Context
 import android.content.ContextWrapper
 import android.view.View
 import androidx.fragment.app.FragmentActivity
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 fun View.getActivity(): Activity = context.getActivity()
@@ -23,3 +25,7 @@ fun Context.getActivity(): Activity {
 
     throw ActivityNotFoundException()
 }
+
+fun Date?.toStringDate(regex: String) = this?.let {
+    SimpleDateFormat(regex, Locale.getDefault()).format(it)
+} ?: ""

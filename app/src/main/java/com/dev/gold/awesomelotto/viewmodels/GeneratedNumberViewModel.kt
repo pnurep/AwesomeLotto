@@ -2,6 +2,7 @@ package com.dev.gold.awesomelotto.viewmodels
 
 import androidx.databinding.ObservableList
 import com.dev.gold.awesomelotto.repository.LottoRepository
+import com.dev.gold.awesomelotto.utils.toStringDate
 import io.reactivex.BackpressureStrategy
 import io.reactivex.Flowable
 
@@ -19,7 +20,9 @@ class GeneratedNumberViewModel(
                         lottoList.groupBy {
                             it.date
                         }.map { entry ->
-                            emitter.onNext(entry.key.toString())
+                            emitter.onNext(
+                                entry.key.toStringDate("yyyy-MM-dd")
+                            )
                             entry.value.forEach { lotto ->
                                 emitter.onNext(lotto)
                             }

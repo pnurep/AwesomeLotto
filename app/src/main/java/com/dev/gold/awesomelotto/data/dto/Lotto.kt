@@ -4,7 +4,6 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
 import com.dev.gold.awesomelotto.data.db.TypeConverter
-import java.text.SimpleDateFormat
 import java.util.*
 
 
