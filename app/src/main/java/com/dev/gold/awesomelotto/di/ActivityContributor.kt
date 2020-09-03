@@ -1,15 +1,9 @@
 package com.dev.gold.awesomelotto.di
 
 import com.dev.gold.awesomelotto.di.modules.ViewModelFactoryModule
-import com.dev.gold.awesomelotto.di.modules.activity.GeneratedNumberModule
-import com.dev.gold.awesomelotto.di.modules.activity.LottoGenerationModule
-import com.dev.gold.awesomelotto.di.modules.activity.MainModule
-import com.dev.gold.awesomelotto.di.modules.activity.SplashModule
+import com.dev.gold.awesomelotto.di.modules.activity.*
 import com.dev.gold.awesomelotto.di.scopes.ActivityScope
-import com.dev.gold.awesomelotto.ui.activity.GeneratedNumberActivity
-import com.dev.gold.awesomelotto.ui.activity.LottoGenerationActivity
-import com.dev.gold.awesomelotto.ui.activity.MainActivity
-import com.dev.gold.awesomelotto.ui.activity.SplashActivity
+import com.dev.gold.awesomelotto.ui.activity.*
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -32,4 +26,8 @@ abstract class ActivityContributor {
     @ActivityScope
     @ContributesAndroidInjector(modules = [ViewModelFactoryModule::class, GeneratedNumberModule::class])
     abstract fun provideGeneratedNumberActivity(): GeneratedNumberActivity
+
+    @ActivityScope
+    @ContributesAndroidInjector(modules = [ViewModelFactoryModule::class, QrCodeModule::class])
+    abstract fun provideQrCodeActivity(): QrCodeActivity
 }

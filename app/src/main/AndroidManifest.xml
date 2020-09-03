@@ -8,10 +8,13 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
 
     <application
         android:name=".AlApplication"
         android:allowBackup="true"
+        android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:largeHeap="true"
@@ -20,7 +23,7 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:replace="supportsRtl">
-        <activity android:name=".ui.activity.QrCodeActivity"></activity>
+
         <activity
             android:name=".ui.activity.SplashActivity"
             android:launchMode="singleTop"
@@ -31,16 +34,24 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".ui.activity.MainActivity"
             android:launchMode="singleTask"
             android:screenOrientation="sensorPortrait" />
+
         <activity
             android:name=".ui.activity.LottoGenerationActivity"
             android:screenOrientation="sensorPortrait" />
+
         <activity
             android:name=".ui.activity.GeneratedNumberActivity"
             android:screenOrientation="sensorPortrait" />
+
+        <activity
+            android:name=".ui.activity.QrCodeActivity"
+            android:screenOrientation="sensorPortrait" />
+
     </application>
 
 </manifest>

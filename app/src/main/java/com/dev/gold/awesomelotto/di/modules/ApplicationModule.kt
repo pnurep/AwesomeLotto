@@ -5,6 +5,8 @@ import androidx.room.Room
 import com.dev.gold.awesomelotto.AlApplication
 import com.dev.gold.awesomelotto.data.APPLICATION_CONTEXT
 import com.dev.gold.awesomelotto.data.db.AlDb
+import com.dev.gold.awesomelotto.utils.PermissionManager
+import com.dev.gold.awesomelotto.utils.PermissionManagerImpl
 import dagger.Module
 import dagger.Provides
 import dagger.Reusable
@@ -18,7 +20,15 @@ object ApplicationModule {
     @Reusable
     @Provides
     @Named(APPLICATION_CONTEXT)
-    fun provideContext(context: AlApplication): Context = context
+    fun provideContext(
+        context: AlApplication
+    ): Context = context
+
+    @Reusable
+    @Provides
+    fun providePermissionManager(
+        context: AlApplication
+    ): PermissionManager = PermissionManagerImpl(context)
 
     // db region
 
@@ -34,11 +44,15 @@ object ApplicationModule {
 
     @Singleton
     @Provides
-    fun provideLottoDao(db: AlDb) = db.lottoDao()
+    fun provideLottoDao(
+        db: AlDb
+    ) = db.lottoDao()
 
     @Singleton
     @Provides
-    fun provideWinningDao(db: AlDb) = db.winningDao()
+    fun provideWinningDao(
+        db: AlDb
+    ) = db.winningDao()
 
     // db endRegion
 }

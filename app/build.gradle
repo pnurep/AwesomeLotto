@@ -8,7 +8,7 @@ android {
 
     defaultConfig {
         applicationId "com.dev.gold.awesomelotto"
-        minSdkVersion 23
+        minSdkVersion 24
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
@@ -71,6 +71,8 @@ dependencies {
 
     implementation "com.facebook.stetho:stetho:1.5.1"
     implementation "com.facebook.stetho:stetho-okhttp3:1.5.1"
+
+    implementation "com.journeyapps:zxing-android-embedded:4.1.0"
 
     testImplementation "junit:junit:4.13"
     androidTestImplementation "androidx.test.ext:junit:1.1.2"

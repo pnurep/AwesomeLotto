@@ -8,6 +8,7 @@ import com.dev.gold.awesomelotto.di.scopes.ActivityScope
 import com.dev.gold.awesomelotto.repository.WinningRepository
 import com.dev.gold.awesomelotto.ui.activity.MainActivity
 import com.dev.gold.awesomelotto.utils.NavigationHandler
+import com.dev.gold.awesomelotto.utils.PermissionManager
 import com.dev.gold.awesomelotto.viewmodels.MainViewModel
 import dagger.Module
 import dagger.Provides
@@ -48,10 +49,12 @@ object MainModule {
     @ViewModelKey(MainViewModel::class)
     fun provideViewModel(
         navigationHandler: NavigationHandler,
+        permissionManager: PermissionManager,
         winningRepository: WinningRepository
     ): ViewModel =
         MainViewModel(
             navigationHandler,
+            permissionManager,
             winningRepository
         )
 }

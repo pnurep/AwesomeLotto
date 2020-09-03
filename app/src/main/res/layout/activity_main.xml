@@ -103,7 +103,7 @@
                     android:id="@+id/tv_qr_code"
                     android:layout_width="match_parent"
                     android:layout_height="52dp"
-                    android:onClick="@{v -> viewModel.goToQrCodeActivity()}"
+                    android:onClick="@{v -> viewModel.goToQrCodeActivity(v)}"
                     android:paddingStart="24dp"
                     android:text="qrCode 확인"
                     android:textSize="18dp"
