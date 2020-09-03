@@ -26,6 +26,7 @@
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolBar"
                 style="@style/Toolbar.Base"
+                app:appBarController="@{@drawable/ic_arrow_up}"
                 app:titleTextColor="#FFFFFF"
                 app:toolBarTitle="@{`로또번호 생성`}" />
 

@@ -2,6 +2,7 @@ package com.dev.gold.awesomelotto.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
@@ -60,6 +61,17 @@ abstract class BaseActivity<T : ViewDataBinding> :
 
             emitter.onSuccess(ActivityResults(true, Intent()))
         }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> {
+                onBackPressed()
+                return true
+            }
+        }
+
+        return super.onOptionsItemSelected(item)
     }
 
     override fun activityFinish() {
