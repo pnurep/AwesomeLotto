@@ -19,5 +19,7 @@ enum class ActivityConstants(val target: Class<*>) {
 
     QRCODE(QrCodeActivity::class.java),
 
-    WEBVIEW(WebViewActivity::class.java)
+    WEBVIEW(WebViewActivity::class.java),
+
+    PASTWINNING(PastWinningActivity::class.java)
 }

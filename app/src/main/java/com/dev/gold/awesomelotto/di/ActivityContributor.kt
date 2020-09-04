@@ -34,4 +34,8 @@ abstract class ActivityContributor {
     @ActivityScope
     @ContributesAndroidInjector(modules = [ViewModelFactoryModule::class, WebViewModule::class])
     abstract fun provideWebViewActivity(): WebViewActivity
+
+    @ActivityScope
+    @ContributesAndroidInjector(modules = [ViewModelFactoryModule::class, PastWinningModule::class])
+    abstract fun providePastWinningActivity(): PastWinningActivity
 }

@@ -100,6 +100,10 @@ class MainViewModel(
     }
 
     fun goToPastWinningActivity() {
-        navigationHandler.goTo(TODO())
+        navigationHandler.goTo(
+            PASTWINNING.target
+        ).subscribeAlter {
+            it
+        }
     }
 }

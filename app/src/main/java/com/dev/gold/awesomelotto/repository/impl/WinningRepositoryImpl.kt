@@ -8,6 +8,7 @@ import com.dev.gold.awesomelotto.data.dto.WinningAndLotto
 import com.dev.gold.awesomelotto.repository.WinningRepository
 import com.dev.gold.awesomelotto.repository.api.WinningApi
 import com.dev.gold.awesomelotto.repository.utils.ApiManager
+import io.reactivex.BackpressureStrategy
 import io.reactivex.Flowable
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -69,6 +70,12 @@ class WinningRepositoryImpl(
                 getWinningAndLottoById(lottoId.toInt())
             }
             .observeOn(AndroidSchedulers.mainThread())
+
+    override fun updateAndGetAllWinnings(
+        latestDrwNo: Int
+    ): Flowable<List<Winning>> {
+        // TODO()
+    }
 
     override fun getAllWinnings(): Flowable<List<Winning>> =
         winningDao.loadWinnings()

@@ -20,6 +20,10 @@ interface WinningRepository {
         drwNo: Int
     ): Single<WinningAndLotto>
 
+    fun updateAndGetAllWinnings(
+        latestDrwNo: Int
+    ): Flowable<List<Winning>>
+
     fun getAllWinnings(): Flowable<List<Winning>>
 
     fun setWinning(winning: Winning): Long
