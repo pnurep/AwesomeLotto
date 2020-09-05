@@ -15,6 +15,7 @@ import com.dev.gold.awesomelotto.utils.UtilsClass.getLatestDrawNumber
 import com.dev.gold.awesomelotto.utils.getActivity
 import com.google.zxing.integration.android.IntentIntegrator
 import io.reactivex.Observable
+import io.reactivex.android.schedulers.AndroidSchedulers
 
 
 class MainViewModel(
@@ -35,7 +36,13 @@ class MainViewModel(
         winningRepository
             .getWinningByDrawNumber(
                 getLatestDrawNumber()
-            ).subscribeAlter { (lotto, winning) ->
+            )
+            .flatMap { lottoId ->
+                winningRepository
+                    .getWinningAndLottoById(lottoId.toInt())
+            }
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeAlter { (lotto, winning) ->
                 _latestDrawNumber.value = winning.id
 
                 _winningNumber.value = (lotto.numbers)

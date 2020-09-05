@@ -2,7 +2,7 @@ package com.dev.gold.awesomelotto.repository
 
 import com.dev.gold.awesomelotto.data.dto.Winning
 import com.dev.gold.awesomelotto.data.dto.WinningAndLotto
-import io.reactivex.Flowable
+import io.reactivex.Maybe
 import io.reactivex.Single
 
 
@@ -18,13 +18,13 @@ interface WinningRepository {
 
     fun getWinningByDrawNumber(
         drwNo: Int
-    ): Single<WinningAndLotto>
+    ): Single<Long>
 
     fun updateAndGetAllWinnings(
         latestDrwNo: Int
-    ): Flowable<List<Winning>>
+    ): Maybe<List<Winning>>
 
-    fun getAllWinnings(): Flowable<List<Winning>>
+    fun getAllWinnings(): Maybe<List<Winning>>
 
     fun setWinning(winning: Winning): Long
 

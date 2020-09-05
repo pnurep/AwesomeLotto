@@ -3,7 +3,7 @@ package com.dev.gold.awesomelotto.data.db.dao
 import androidx.room.*
 import com.dev.gold.awesomelotto.data.dto.Winning
 import com.dev.gold.awesomelotto.data.dto.WinningAndLotto
-import io.reactivex.Flowable
+import io.reactivex.Maybe
 import io.reactivex.Single
 
 
@@ -20,10 +20,10 @@ interface WinningDao {
     @Query(
         """
         SELECT * FROM Winning
-        ORDER BY winning_id DESC
+        ORDER BY winning_id ASC
         """
     )
-    fun loadWinnings(): Flowable<List<Winning>>
+    fun loadWinnings(): Maybe<List<Winning>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(winning1: Winning): Long

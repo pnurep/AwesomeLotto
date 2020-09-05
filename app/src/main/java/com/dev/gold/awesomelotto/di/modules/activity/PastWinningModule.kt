@@ -7,7 +7,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.dev.gold.awesomelotto.di.ViewModelKey
 import com.dev.gold.awesomelotto.di.scopes.ActivityScope
+import com.dev.gold.awesomelotto.repository.WinningRepository
 import com.dev.gold.awesomelotto.ui.activity.PastWinningActivity
+import com.dev.gold.awesomelotto.ui.widget.RxProgressDialog
 import com.dev.gold.awesomelotto.viewmodels.PastWinningViewModel
 import dagger.Module
 import dagger.Provides
@@ -44,6 +46,18 @@ object PastWinningModule {
     @IntoMap
     @ActivityScope
     @ViewModelKey(PastWinningViewModel::class)
-    fun provideViewModel(): ViewModel =
-        PastWinningViewModel()
+    fun provideViewModel(
+        winningRepository: WinningRepository,
+        dialog: RxProgressDialog
+    ): ViewModel =
+        PastWinningViewModel(
+            winningRepository,
+            dialog
+        )
+
+    @Provides
+    @ActivityScope
+    fun provideProgressDialog(
+        activity: PastWinningActivity
+    ) = RxProgressDialog.from(activity)
 }

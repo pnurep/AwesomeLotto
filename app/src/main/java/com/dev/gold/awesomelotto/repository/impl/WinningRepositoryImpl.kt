@@ -8,13 +8,13 @@ import com.dev.gold.awesomelotto.data.dto.WinningAndLotto
 import com.dev.gold.awesomelotto.repository.WinningRepository
 import com.dev.gold.awesomelotto.repository.api.WinningApi
 import com.dev.gold.awesomelotto.repository.utils.ApiManager
-import io.reactivex.BackpressureStrategy
-import io.reactivex.Flowable
+import io.reactivex.Maybe
+import io.reactivex.Observable
 import io.reactivex.Single
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import java.text.SimpleDateFormat
 import java.util.*
+import java.util.concurrent.TimeUnit
 
 
 class WinningRepositoryImpl(
@@ -66,18 +66,38 @@ class WinningRepositoryImpl(
 
                 lottoId
             }
-            .flatMap { lottoId ->
-                getWinningAndLottoById(lottoId.toInt())
-            }
-            .observeOn(AndroidSchedulers.mainThread())
 
     override fun updateAndGetAllWinnings(
         latestDrwNo: Int
-    ): Flowable<List<Winning>> {
-        // TODO()
-    }
+    ): Maybe<List<Winning>> =
+        getAllWinnings()
+            .subscribeOn(Schedulers.io())
+            .flatMap { savedList ->
+                if (savedList.size < latestDrwNo) {
+                    Observable
+                        .fromIterable((1..latestDrwNo).toList())
+                        .concatMapEager { drwNo ->
+                            TimeUnit.MILLISECONDS.sleep(250)
+                            val savedWinning = winningDao.getWinningById(drwNo)
+                            if (savedWinning == null) {
+                                getWinningByDrawNumber(drwNo)
+                                    .flatMapObservable {
+                                        Observable.just(winningDao.getWinningById(drwNo)!!)
+                                    }
+                            } else {
+                                Observable.just(savedWinning)
+                            }
+                        }
+                        .toList()
+                        .flatMapMaybe {
+                            Maybe.just(it)
+                        }
+                } else {
+                    Maybe.just(savedList)
+                }
+            }
 
-    override fun getAllWinnings(): Flowable<List<Winning>> =
+    override fun getAllWinnings(): Maybe<List<Winning>> =
         winningDao.loadWinnings()
 
     override fun setWinning(winning: Winning) =
