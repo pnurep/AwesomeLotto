@@ -16,6 +16,8 @@ interface WinningRepository {
         lottoId: Int
     ): Single<WinningAndLotto>
 
+    fun getAllWinningAndLotto(): Maybe<List<WinningAndLotto>>
+
     fun getWinningByDrawNumber(
         drwNo: Int
     ): Single<Long>

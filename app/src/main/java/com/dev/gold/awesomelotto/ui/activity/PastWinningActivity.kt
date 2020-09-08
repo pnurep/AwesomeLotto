@@ -4,6 +4,7 @@ import android.os.Bundle
 import com.dev.gold.awesomelotto.R
 import com.dev.gold.awesomelotto.BR
 import com.dev.gold.awesomelotto.databinding.ActivityPastWinningBinding
+import com.dev.gold.awesomelotto.ui.widget.listAdapter.PastWinningListAdapter
 import com.dev.gold.awesomelotto.viewmodels.PastWinningViewModel
 import javax.inject.Inject
 
@@ -15,10 +16,14 @@ class PastWinningActivity(
     @Inject
     lateinit var viewModel: PastWinningViewModel
 
+    @Inject
+    lateinit var listAdapter: PastWinningListAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding.setVariable(BR.viewModel, viewModel)
+        binding.setVariable(BR.listAdapter, listAdapter)
         binding.executePendingBindings()
     }
 }

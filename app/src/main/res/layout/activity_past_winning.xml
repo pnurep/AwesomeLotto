@@ -9,13 +9,22 @@
             name="viewModel"
             type="com.dev.gold.awesomelotto.viewmodels.PastWinningViewModel" />
 
+        <variable
+            name="listAdapter"
+            type="com.dev.gold.awesomelotto.ui.widget.listAdapter.PastWinningListAdapter" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:listAdapter="@{listAdapter}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

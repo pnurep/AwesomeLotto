@@ -4,7 +4,6 @@ import android.Manifest
 import android.app.Activity
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.dev.gold.awesomelotto.data.ActivityConstants.*
@@ -101,16 +100,12 @@ class MainViewModel(
                     }
                 }
             }
-            .subscribeAlter {
-                it
-            }
+            .subscribeAlter {}
     }
 
     fun goToPastWinningActivity() {
         navigationHandler.goTo(
             PASTWINNING.target
-        ).subscribeAlter {
-            it
-        }
+        ).subscribeAlter {}
     }
 }

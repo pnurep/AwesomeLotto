@@ -29,3 +29,6 @@ fun Context.getActivity(): Activity {
 fun Date?.toStringDate(regex: String) = this?.let {
     SimpleDateFormat(regex, Locale.getDefault()).format(it)
 } ?: ""
+
+fun <T> Iterable<T>.joinToString(regex: String): String =
+    joinToString(separator = regex)

@@ -14,6 +14,10 @@ interface WinningDao {
     @Query("""SELECT * FROM Lotto WHERE lottoId = :lottoId""")
     fun getWinningAndLottoById(lottoId: Int): Single<WinningAndLotto>
 
+    @Transaction
+    @Query("""SELECT * FROM Lotto""")
+    fun getAllWinningAndLotto(): Maybe<List<WinningAndLotto>>
+
     @Query("""SELECT * FROM Winning WHERE winning_id = :id LIMIT 1""")
     fun getWinningById(id: Int): Winning?
 

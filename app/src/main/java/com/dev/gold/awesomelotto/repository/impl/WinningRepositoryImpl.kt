@@ -32,6 +32,9 @@ class WinningRepositoryImpl(
     override fun getWinningAndLottoById(lottoId: Int): Single<WinningAndLotto> =
         winningDao.getWinningAndLottoById(lottoId)
 
+    override fun getAllWinningAndLotto(): Maybe<List<WinningAndLotto>> =
+        winningDao.getAllWinningAndLotto()
+
     override fun getWinningByDrawNumber(drwNo: Int) =
         api.getWinning(drwNo)
             .subscribeOn(Schedulers.io())
