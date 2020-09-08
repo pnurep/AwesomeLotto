@@ -37,6 +37,20 @@ interface LottoDao {
 
     @Query(
         """
+            SELECT * 
+            FROM Lotto
+            WHERE lottoId 
+            NOT IN (
+                SELECT winningLottoId
+                FROM Winning
+                WHERE winningLottoId IS NOT NULL
+            )
+        """
+    )
+    fun getAllUserGeneratedLotto(): Single<List<Lotto>>
+
+    @Query(
+        """
         SELECT * FROM lotto
         ORDER BY lottoId DESC"""
     )

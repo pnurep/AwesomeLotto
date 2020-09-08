@@ -21,5 +21,7 @@ interface LottoRepository{
 
     fun deleteAllLotto(): Single<Int>
 
-    fun getAllLotto(): Flowable<List<Lotto>>
+    fun getAllUserGeneratedLotto(): Single<List<Lotto>>
+
+    fun getAllSavedLotto(): Flowable<List<Lotto>>
 }

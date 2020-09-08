@@ -5,6 +5,8 @@ import com.dev.gold.awesomelotto.repository.LottoRepository
 import com.dev.gold.awesomelotto.utils.toStringDate
 import io.reactivex.BackpressureStrategy
 import io.reactivex.Flowable
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 
 
 class GeneratedNumberViewModel(
@@ -13,8 +15,9 @@ class GeneratedNumberViewModel(
 ) : BaseViewModel() {
 
     init {
-        lottoRepository.getAllLotto()
-            .flatMapSingle { lottoList ->
+        lottoRepository.getAllUserGeneratedLotto()
+            .subscribeOn(Schedulers.io())
+            .flatMap { lottoList ->
                 Flowable.create<Any>(
                     { emitter ->
                         lottoList.groupBy {
@@ -30,6 +33,7 @@ class GeneratedNumberViewModel(
                     }, BackpressureStrategy.BUFFER
                 ).toList()
             }
+            .observeOn(AndroidSchedulers.mainThread())
             .subscribeAlter {
                 listData.addAll(it)
             }
