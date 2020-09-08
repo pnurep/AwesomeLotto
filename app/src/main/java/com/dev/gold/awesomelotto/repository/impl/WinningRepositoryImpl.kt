@@ -26,14 +26,17 @@ class WinningRepositoryImpl(
 
     private val api = apiManager[WinningApi::class.java]
 
-    override fun getWinningById(id: Int): Winning? =
-        winningDao.getWinningById(id)
+    override fun getWinningById(
+        id: Int
+    ): Winning? = winningDao.getWinningById(id)
 
-    override fun getWinningAndLottoById(lottoId: Int): Single<WinningAndLotto> =
-        winningDao.getWinningAndLottoById(lottoId)
+    override fun getWinningAndLottoById(
+        lottoId: Int
+    ): Single<WinningAndLotto> = winningDao.getWinningAndLottoById(lottoId)
 
-    override fun getAllWinningAndLotto(): Maybe<List<WinningAndLotto>> =
-        winningDao.getAllWinningAndLotto()
+    override fun getAllWinningAndLotto(
+        isAsc: Boolean
+    ): Maybe<List<WinningAndLotto>> = winningDao.getAllWinningAndLotto(isAsc)
 
     override fun getWinningByDrawNumber(drwNo: Int) =
         api.getWinning(drwNo)
@@ -100,16 +103,16 @@ class WinningRepositoryImpl(
                 }
             }
 
-    override fun getAllWinnings(): Maybe<List<Winning>> =
-        winningDao.loadWinnings()
+    override fun getAllWinnings() = winningDao.loadWinnings()
 
-    override fun setWinning(winning: Winning) =
-        winningDao.insert(winning)
+    override fun setWinning(
+        winning: Winning
+    ) = winningDao.insert(winning)
 
     override fun deleteAllWinnings(): Single<Int> =
         winningDao.deleteAll()
 
-    override fun deleteWinningById(winningId: Int): Single<Int> {
-        return winningDao.deleteById(winningId)
-    }
+    override fun deleteWinningById(
+        winningId: Int
+    ) = winningDao.deleteById(winningId)
 }

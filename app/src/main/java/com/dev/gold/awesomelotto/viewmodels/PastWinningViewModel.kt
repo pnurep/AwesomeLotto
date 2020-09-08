@@ -27,7 +27,8 @@ class PastWinningViewModel(
                     )
             )
             .flatMap {
-                winningRepository.getAllWinningAndLotto()
+                winningRepository
+                    .getAllWinningAndLotto(false)
             }
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeAlter {
