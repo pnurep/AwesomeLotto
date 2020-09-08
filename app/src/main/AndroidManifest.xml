@@ -14,16 +14,14 @@
         android:name=".AlApplication"
         android:allowBackup="true"
         android:hardwareAccelerated="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_awesome_lotto_round"
         android:label="@string/app_name"
         android:largeHeap="true"
-        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="false"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:replace="supportsRtl">
-        <activity android:name=".ui.activity.PastWinningActivity"></activity>
-        <activity android:name=".ui.activity.WebViewActivity" />
+
         <activity
             android:name=".ui.activity.SplashActivity"
             android:launchMode="singleTop"
@@ -47,6 +45,13 @@
         <activity
             android:name=".ui.activity.QrCodeActivity"
             android:screenOrientation="sensorPortrait" />
+        <activity
+            android:name=".ui.activity.WebViewActivity"
+            android:screenOrientation="sensorPortrait" />
+        <activity
+            android:name=".ui.activity.PastWinningActivity"
+            android:screenOrientation="sensorPortrait" />
+
     </application>
 
 </manifest>
