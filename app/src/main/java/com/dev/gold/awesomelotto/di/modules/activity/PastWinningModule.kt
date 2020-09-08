@@ -12,6 +12,7 @@ import com.dev.gold.awesomelotto.repository.WinningRepository
 import com.dev.gold.awesomelotto.ui.activity.PastWinningActivity
 import com.dev.gold.awesomelotto.ui.widget.RxProgressDialog
 import com.dev.gold.awesomelotto.ui.widget.listAdapter.PastWinningListAdapter
+import com.dev.gold.awesomelotto.utils.NavigationHandler
 import com.dev.gold.awesomelotto.viewmodels.PastWinningViewModel
 import dagger.Module
 import dagger.Provides
@@ -26,6 +27,12 @@ object PastWinningModule {
     fun provideActivity(
         activity: PastWinningActivity
     ): FragmentActivity = activity
+
+    @Provides
+    @ActivityScope
+    fun provideNavigationHandler(
+        activity: PastWinningActivity
+    ): NavigationHandler = activity
 
     @Provides
     @ActivityScope
@@ -47,11 +54,13 @@ object PastWinningModule {
     fun provideViewModel(
         listData: ObservableList<WinningAndLotto>,
         winningRepository: WinningRepository,
+        navigationHandler: NavigationHandler,
         dialog: RxProgressDialog
     ): ViewModel =
         PastWinningViewModel(
             listData,
             winningRepository,
+            navigationHandler,
             dialog
         )
 

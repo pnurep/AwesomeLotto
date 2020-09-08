@@ -32,3 +32,6 @@ fun Date?.toStringDate(regex: String) = this?.let {
 
 fun <T> Iterable<T>.joinToString(regex: String): String =
     joinToString(separator = regex)
+
+fun <T1 : Any, T2 : Any, R : Any> safeLet(t1: T1?, t2: T2?, block: (T1, T2) -> R?): R? =
+    if (t1 != null && t2 != null) block(t1, t2) else null

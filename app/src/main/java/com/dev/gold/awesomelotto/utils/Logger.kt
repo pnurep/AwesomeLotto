@@ -11,20 +11,8 @@ object Logger {
 
     var isDebuggable = false
 
-    var additionalLog: ((mode: Int, className: String?, msg: String) -> Unit)? = null
-    var additionalLogException: ((Throwable) -> Unit)? = null
-
-    private fun log(mode: Int, className: String?, msg: String) {
-        if (isDebuggable) return
-        additionalLog?.invoke(mode, className, msg)
-    }
-
-    /**
-     * Exceptions
-     */
     fun logException(e: Throwable) {
         if (isDebuggable) e.printStackTrace()
-        additionalLogException?.invoke(e)
     }
 
     private fun createLog(log: String) = "[$methodName:$lineNumber]$log"
@@ -41,7 +29,6 @@ object Logger {
         getMethodNames(Throwable().stackTrace)
 
         Log.e(className, createLog(message))
-        log(Log.ERROR, className, createLog(message))
     }
 
     fun i(message: String) {
@@ -50,7 +37,6 @@ object Logger {
         getMethodNames(Throwable().stackTrace)
 
         Log.i(className, createLog(message))
-        log(Log.INFO, className, createLog(message))
     }
 
     fun d(message: String) {
@@ -59,7 +45,6 @@ object Logger {
         getMethodNames(Throwable().stackTrace)
 
         Log.d(className, createLog(message))
-        log(Log.DEBUG, className, createLog(message))
     }
 
     fun v(message: String) {
@@ -68,7 +53,6 @@ object Logger {
         getMethodNames(Throwable().stackTrace)
 
         Log.v(className, createLog(message))
-        log(Log.VERBOSE, className, createLog(message))
     }
 
     fun w(message: String) {
@@ -77,7 +61,5 @@ object Logger {
         getMethodNames(Throwable().stackTrace)
 
         Log.w(className, createLog(message))
-        log(Log.WARN, className, createLog(message))
     }
-
 }

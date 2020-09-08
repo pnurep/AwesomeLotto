@@ -4,6 +4,7 @@ import android.app.Dialog
 import android.app.ProgressDialog
 import android.content.Context
 import androidx.annotation.StringRes
+import com.dev.gold.awesomelotto.data.OnDialogCancel
 import io.reactivex.*
 
 
@@ -37,68 +38,100 @@ class RxProgressDialog private constructor(
     fun setIndeterminate(indeterminate: Boolean) =
         apply { this.indeterminate = indeterminate }
 
-    private fun <T> process(
+    private fun <T> ObservableEmitter<T>.process(
         upstream: Observable<T>,
         dialog: ProgressDialog
-    ): Observable<T> =
-        Observable.create { emitter ->
-
-            if (isCancelable)
-                dialog.setOnCancelListener { emitter.onComplete() }
-
-            dialog.setOnDismissListener { emitter.onComplete() }
-
-            val disposable = upstream.subscribe(
-                emitter::onNext,
-                emitter::onError,
-                emitter::onComplete
-            )
-            emitter.setDisposable(disposable)
-        }
-
-    private fun process(
-        upstream: Completable,
-        dialog: ProgressDialog
-    ): Completable =
-        Completable.create { emitter ->
-
-            if (isCancelable)
-                dialog.setOnCancelListener { emitter.onComplete() }
-
-            dialog.setOnDismissListener { emitter.onComplete() }
-
-            val disposable =
-                upstream.subscribe(
-                    emitter::onComplete,
-                    emitter::onError
-                )
-            emitter.setDisposable(disposable)
-        }
-
-    private fun <T> process(
-        upstream: Flowable<T>,
-        backpressureStrategy: BackpressureStrategy,
-        dialog: ProgressDialog
-    ): Flowable<T> = Flowable.create({ emitter ->
-
+    ) {
         if (isCancelable)
-            dialog.setOnCancelListener { emitter.onComplete() }
+            dialog.setOnCancelListener { onError(OnDialogCancel) }
 
-        dialog.setOnDismissListener { emitter.onComplete() }
+        dialog.setOnDismissListener { onComplete() }
 
         val disposable = upstream.subscribe(
-            emitter::onNext,
-            emitter::onError,
-            emitter::onComplete
+            ::onNext,
+            ::onError,
+            ::onComplete
         )
-        emitter.setDisposable(disposable)
-    }, backpressureStrategy)
+
+        setDisposable(disposable)
+    }
+
+    private fun CompletableEmitter.process(
+        upstream: Completable,
+        dialog: ProgressDialog
+    ) {
+        if (isCancelable)
+            dialog.setOnCancelListener { onError(OnDialogCancel) }
+
+        dialog.setOnDismissListener { onComplete() }
+
+        val disposable =
+            upstream.subscribe(
+                ::onComplete,
+                ::onError
+            )
+
+        setDisposable(disposable)
+    }
+
+    private fun <T> FlowableEmitter<T>.process(
+        upstream: Flowable<T>,
+        dialog: ProgressDialog
+    ) {
+        if (isCancelable)
+            dialog.setOnCancelListener { onError(OnDialogCancel) }
+
+        dialog.setOnDismissListener { onComplete() }
+
+        val disposable = upstream.subscribe(
+            ::onNext,
+            ::onError,
+            ::onComplete
+        )
+
+        setDisposable(disposable)
+    }
+
+    private fun <T> SingleEmitter<T>.process(
+        upstream: Single<T>,
+        dialog: ProgressDialog
+    ) {
+        if (isCancelable)
+            dialog.setOnCancelListener { onError(OnDialogCancel) }
+
+        val disposable =
+            upstream.subscribe(
+                ::onSuccess,
+                ::onError
+            )
+
+        setDisposable(disposable)
+    }
+
+    private fun <T> MaybeEmitter<T>.process(
+        upstream: Maybe<T>,
+        dialog: ProgressDialog
+    ) {
+        if (isCancelable)
+            dialog.setOnCancelListener { onError(OnDialogCancel) }
+
+        val disposable =
+            upstream.subscribe(
+                ::onSuccess,
+                ::onError,
+                ::onComplete
+            )
+
+        setDisposable(disposable)
+    }
 
     fun <T> forObservable(source: Observable<T>): Observable<T> =
         Observable.using(
             this::makeDialog,
             { dialog ->
-                process(source, dialog)
+                Observable.create { emitter ->
+                    emitter.process(source, dialog)
+                }
             },
             Dialog::dismiss
         )
@@ -110,16 +143,20 @@ class RxProgressDialog private constructor(
         Flowable.using(
             this::makeDialog,
             { dialog ->
-                process(source, backPressureStrategy, dialog)
+                Flowable.create(
+                    { emitter ->
+                        emitter.process(source, dialog)
+                    }, backPressureStrategy
+                )
             },
             Dialog::dismiss
         )
 
     fun <T> forSingle(source: Single<T>): Single<T> = Single.using<T, ProgressDialog>(
         this::makeDialog,
-        {
+        { dialog ->
             Single.create { emitter ->
-                source.subscribe(emitter::onSuccess, emitter::onError)
+                emitter.process(source, dialog)
             }
         },
         Dialog::dismiss
@@ -127,13 +164,9 @@ class RxProgressDialog private constructor(
 
     fun <T> forMaybe(source: Maybe<T>): Maybe<T> = Maybe.using<T, ProgressDialog>(
         this::makeDialog,
-        {
+        { dialog ->
             Maybe.create { emitter ->
-                source.subscribe(
-                    emitter::onSuccess,
-                    emitter::onError,
-                    emitter::onComplete
-                )
+                emitter.process(source, dialog)
             }
         },
         Dialog::dismiss
@@ -142,7 +175,9 @@ class RxProgressDialog private constructor(
     fun forCompletable(source: Completable): Completable = Completable.using(
         this::makeDialog,
         { dialog ->
-            process(source, dialog)
+            Completable.create { emitter ->
+                emitter.process(source, dialog)
+            }
         },
         Dialog::dismiss
     )

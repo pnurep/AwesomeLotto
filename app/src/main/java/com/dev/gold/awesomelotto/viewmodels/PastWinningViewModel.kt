@@ -1,9 +1,11 @@
 package com.dev.gold.awesomelotto.viewmodels
 
 import androidx.databinding.ObservableList
+import com.dev.gold.awesomelotto.data.DialogException
 import com.dev.gold.awesomelotto.data.dto.WinningAndLotto
 import com.dev.gold.awesomelotto.repository.WinningRepository
 import com.dev.gold.awesomelotto.ui.widget.RxProgressDialog
+import com.dev.gold.awesomelotto.utils.NavigationHandler
 import com.dev.gold.awesomelotto.utils.UtilsClass.getLatestDrawNumber
 import io.reactivex.android.schedulers.AndroidSchedulers
 
@@ -11,6 +13,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 class PastWinningViewModel(
     listData: ObservableList<WinningAndLotto>,
     winningRepository: WinningRepository,
+    navigationHandler: NavigationHandler,
     dialog: RxProgressDialog
 ) : BaseViewModel() {
 
@@ -31,8 +34,12 @@ class PastWinningViewModel(
                     .getAllWinningAndLotto(false)
             }
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribeAlter {
+            .subscribeAlter ({
                 listData.addAll(it)
-            }
+            }, { throwable ->
+                (throwable as? DialogException)?.let {
+                    navigationHandler.activityFinish()
+                }
+            })
     }
 }

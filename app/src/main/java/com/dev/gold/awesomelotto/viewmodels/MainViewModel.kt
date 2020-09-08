@@ -12,6 +12,7 @@ import com.dev.gold.awesomelotto.utils.NavigationHandler
 import com.dev.gold.awesomelotto.utils.PermissionManager
 import com.dev.gold.awesomelotto.utils.UtilsClass.getLatestDrawNumber
 import com.dev.gold.awesomelotto.utils.getActivity
+import com.dev.gold.awesomelotto.utils.safeLet
 import com.google.zxing.integration.android.IntentIntegrator
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -41,11 +42,14 @@ class MainViewModel(
                     .getWinningAndLottoById(lottoId.toInt())
             }
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribeAlter { (lotto, winning) ->
-                _latestDrawNumber.value = winning.id
+            .subscribeAlter { (p1, p2) ->
 
-                _winningNumber.value = (lotto.numbers)
-                    .joinToString() + " + ${winning.bonusNumber}"
+                safeLet(p1, p2) { lotto, winning ->
+                    _latestDrawNumber.value = winning.id
+
+                    _winningNumber.value = (lotto.numbers)
+                        .joinToString() + " + ${winning.bonusNumber}"
+                }
             }
     }
 

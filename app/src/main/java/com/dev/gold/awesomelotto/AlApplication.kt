@@ -2,6 +2,7 @@ package com.dev.gold.awesomelotto
 
 import android.app.Application
 import com.dev.gold.awesomelotto.di.DaggerApplicationComponent
+import com.dev.gold.awesomelotto.utils.Logger
 import com.dev.gold.awesomelotto.utils.TaskStateManager
 import com.facebook.stetho.Stetho
 import dagger.android.AndroidInjector
@@ -28,6 +29,8 @@ class AlApplication : Application(), HasAndroidInjector {
 
     override fun onCreate() {
         super.onCreate()
+
+        Logger.isDebuggable = BuildConfig.DEBUG
 
         TaskStateManager.init(this)
 

@@ -5,7 +5,6 @@ import androidx.databinding.ObservableList
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.dev.gold.awesomelotto.data.dto.Lotto
 import com.dev.gold.awesomelotto.di.ViewModelKey
 import com.dev.gold.awesomelotto.di.scopes.ActivityScope
 import com.dev.gold.awesomelotto.repository.LottoRepository

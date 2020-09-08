@@ -10,5 +10,5 @@ data class WinningAndLotto(
         parentColumn = "lottoId",
         entityColumn = "winningLottoId"
     )
-    val winning: Winning
+    val winning: Winning?
 )
