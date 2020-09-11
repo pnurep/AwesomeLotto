@@ -59,5 +59,5 @@ interface TerminalOperators {
         onError: (Throwable) -> Unit = Logger::logException
     )
 
-    fun clearSubscribes()
+    fun clearObservers()
 }

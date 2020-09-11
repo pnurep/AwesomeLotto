@@ -19,7 +19,7 @@ abstract class BaseViewModel(
     }
 
     public override fun onCleared() {
-        clearSubscribes()
+        clearObservers()
         super.onCleared()
     }
 }

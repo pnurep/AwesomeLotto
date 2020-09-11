@@ -67,7 +67,7 @@ class TerminalOperatorsImpl : TerminalOperators {
         onError: (Throwable) -> Unit
     ) = subscribe(onSuccess, onError).add()
 
-    override fun clearSubscribes() {
+    override fun clearObservers() {
         compositeDisposable.clear()
     }
 }
