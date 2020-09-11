@@ -13,7 +13,6 @@ AwesomeLotto 와 함께 1등되세요!
 <img src="resources/screenshots/screenshots_2.png" />
 <img src="resources/screenshots/screenshots_3.png" />
 <img src="resources/screenshots/screenshots_4.png" />
-<img src="resources/screenshots/screenshots_5.png" />
 
 </p>
 
