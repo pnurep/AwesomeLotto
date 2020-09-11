@@ -1,4 +1,4 @@
-# <p align="center"> ![Icon](res/mipmap-xhdpi/ic_awesome_lotto_round.png) AwesomeLotto </p>
+# <p align="center"> ![Icon](resources/ic_awesome_lotto_round.png) AwesomeLotto </p>
 
 <p align="center">
 <img src="https://img.shields.io/badge/kotlin-1.4-blue" />
