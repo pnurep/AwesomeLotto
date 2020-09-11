@@ -9,10 +9,9 @@ AwesomeLotto 와 함께 1등되세요!
 ## ScreenShots
 <p align="center">
 
-<img src="ScreenShots/screenshots_1.png" />
-<img src="ScreenShots/screenshots_2.png" />
-<img src="ScreenShots/screenshots_3.png" />
-<img src="ScreenShots/screenshots_4.png" />
+<img src="resources/screenshots/screenshots_1.png" />
+<img src="resources/screenshots/screenshots_2.png" />
+<img src="resources/screenshots/screenshots_3.png" />
 
 </p>
 
