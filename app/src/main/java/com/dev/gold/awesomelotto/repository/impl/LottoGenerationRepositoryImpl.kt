@@ -37,6 +37,8 @@ class LottoGenerationRepositoryImpl(
                 .toMutableList()
                 .apply { shuffle() }
                 .take(6)
+                .sorted()
+            
             date = Date()
         }
 }
