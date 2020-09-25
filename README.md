@@ -24,3 +24,7 @@ AwesomeLotto 와 함께 1등되세요!
 5. DataBinding
 6. Retrofit2
 7. ZXing
+
+## TODO()
+
+bugFix, modulization?, etc...
