@@ -15,7 +15,7 @@ object UtilsModule {
 
     @Reusable
     @Provides
-    fun provideGson() = GsonBuilder()
+    fun provideGson(): Gson = GsonBuilder()
         .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
         .setDateFormat("yyyy-MM-dd'T'HH:mm:ss")
         .create()
